@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kitty Launcher - The Coziest Minecraft Adventure</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ee2b5b",
+                        "primary-hover": "#d6204b",
+                        "soft-pink": "#ffe4e9",
+                        "soft-purple": "#f3e6ff",
+                        "background-light": "#fff9fa",
+                        "background-dark": "#221015",
+                        "text-main": "#4a1d2c",
+                        "text-secondary": "#89616b",
+                        "modal-bg": "#0f0f0f",
+                        "modal-card": "#1a1a1a",
+                        "modal-border": "#333333",
+                        "btn-pink": "#f472b6",
+                        "btn-pink-dark": "#db2777"
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "1.5rem",
+                        "xl": "2.5rem",
+                        "2xl": "3rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(238, 43, 91, 0.1)',
+                        'card': '0 4px 20px -2px rgba(238, 43, 91, 0.05)',
+                        'hard': '4px 4px 0px 0px rgba(0,0,0,1)',
+                        'pink-glow': '0 0 15px rgba(244, 114, 182, 0.5)'
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            background-color: #fff9fa;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-float-delayed {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: 3s;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .modal-transition {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .btn-retro-pink {
+            background-color: #f472b6;
+            color: white;
+            border: 2px solid black;
+            box-shadow: 4px 4px 0px 0px #000000;
+            transition: all 0.2s ease;
+        }
+
+        .btn-retro-pink:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+
+        .btn-retro-pink:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px 0px #000000;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light text-text-main antialiased selection:bg-primary selection:text-white">
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div
+            class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-soft-pink rounded-full blur-[100px] opacity-60">
+        </div>
+        <div
+            class="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-soft-purple rounded-full blur-[120px] opacity-60">
+        </div>
+    </div>
+    <div class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4" id="downloadModal">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="relative w-full max-w-5xl bg-modal-bg rounded-2xl border border-modal-border shadow-2xl overflow-hidden flex flex-col md:flex-row modal-transition transform scale-95 opacity-0 text-white"
+            id="modalContent">
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-white z-20" onclick="closeModal()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="p-8 md:p-10 w-full">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-1">Kitties Land Client Launcher</h2>
+                        <p class="text-gray-400 text-sm">One-click join, optimized performance and the cutest UI for
+                            Kitties Land.</p>
+                    </div>
+                    <div
+                        class="hidden md:flex items-center gap-2 bg-[#052e16] text-green-400 border border-green-800/50 px-3 py-1 rounded-full text-xs font-bold">
+                        <span class="w-2 h-2 rounded-full bg-green-400"></span> Verified &amp; safe
+                    </div>
+                </div>
+                <div
+                    class="relative bg-modal-card rounded-xl border border-modal-border p-4 mb-8 flex justify-center items-center overflow-hidden h-[300px] md:h-[350px]">
+                    <div
+                        class="w-full max-w-2xl bg-[#0f0b15] rounded-lg border border-white/5 shadow-2xl overflow-hidden flex h-full">
+                        <div class="w-16 border-r border-white/5 flex flex-col items-center py-4 gap-6 bg-[#0f0b15]">
+                            <span class="material-symbols-outlined text-white text-2xl">pets</span>
+                            <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
+                                <span class="material-symbols-outlined text-xl">home</span>
+                            </div>
+                            <span class="material-symbols-outlined text-gray-600 text-xl">grid_view</span>
+                            <div class="mt-auto">
+                                <span class="material-symbols-outlined text-gray-600 text-xl">settings</span>
+                            </div>
+                        </div>
+                        <div class="flex-1 p-6 flex flex-col">
+                            <div class="flex justify-between items-center mb-6">
+                                <div>
+                                    <h3 class="text-primary font-bold text-lg">Kitty Launcher <span
+                                            class="text-xs text-gray-500 ml-1">v2.4.0</span></h3>
+                                    <p class="text-[10px] text-green-500">• kittylauncher.wuaze.com</p>
+                                </div>
+                            </div>
+                            <div
+                                class="h-32 rounded-xl bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-900 mb-4 relative overflow-hidden flex items-end justify-end p-4">
+                                <div
+                                    class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&amp;w=1000&amp;auto=format&amp;fit=crop')] bg-cover opacity-20 mix-blend-overlay">
+                                </div>
+                                <button
+                                    class="bg-primary hover:bg-primary-hover text-white text-xs font-bold py-2 px-6 rounded-md shadow-lg flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-sm">play_arrow</span> PLAY NOW
+                                </button>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <div class="bg-[#1a1625] rounded-lg p-3 flex items-center gap-3 border border-white/5">
+                                    <div
+                                        class="w-8 h-8 rounded bg-white/5 flex items-center justify-center text-purple-400">
+                                        <span class="material-symbols-outlined text-sm">schedule</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] text-gray-500 uppercase font-bold">Playtime</p>
+                                        <p class="text-xs font-bold text-white">1,248h</p>
+                                    </div>
+                                </div>
+                                <div class="bg-[#1a1625] rounded-lg p-3 flex items-center gap-3 border border-white/5">
+                                    <div
+                                        class="w-8 h-8 rounded bg-white/5 flex items-center justify-center text-blue-400">
+                                        <span class="material-symbols-outlined text-sm">folder</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] text-gray-500 uppercase font-bold">Assets</p>
+                                        <p class="text-xs font-bold text-white">Open Folder</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 text-sm">
+                    <div class="bg-modal-card border border-modal-border p-4 rounded-lg">
+                        <h4 class="font-bold text-white mb-1">One-click join</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Play without entering IP or versions, just
+                            press Play and hop in.</p>
+                    </div>
+                    <div class="bg-modal-card border border-modal-border p-4 rounded-lg">
+                        <h4 class="font-bold text-white mb-1">Optimized pack</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Client-side mods for FPS, minimap and cosmetics
+                            bundled together.</p>
+                    </div>
+                    <div class="bg-modal-card border border-modal-border p-4 rounded-lg">
+                        <h4 class="font-bold text-white mb-1">Auto updates</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">No manual downloads; Kitty Launcher keeps
+                            itself updated.</p>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <a href="https://cold4.gofile.io/download/web/acbd5b07-3a57-4acb-89c2-f2656ac1cf3a/Loader%20Setup%201.0.0.exe"
+                        class="w-full md:w-auto bg-gradient-to-r from-pink-500 to-primary hover:from-pink-400 hover:to-primary-hover text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-primary/20 flex items-center justify-center gap-2 transition-transform transform hover:-translate-y-1 no-underline">
+                        <span class="material-symbols-outlined text-xl">download</span>
+                        Download for Windows <span class="text-white/60 text-xs font-normal ml-1">(Installer
+                            .exe)</span>
+                    </a>
+                    <p class="text-gray-500 text-xs text-center md:text-right">Windows only for now. macOS &amp; Linux
+                        versions are in development.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relative z-10 flex min-h-screen w-full flex-col">
+        <nav class="sticky top-4 z-50 w-full px-4 sm:px-8 flex justify-center">
+            <div
+                class="w-full max-w-[1100px] bg-white/80 backdrop-blur-md border border-white/50 shadow-soft rounded-full px-6 py-3 flex items-center justify-between transition-all duration-300">
+                <div class="flex items-center gap-3">
+                    <div class="size-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined" style="font-size: 24px;">pets</span>
+                    </div>
+                    <span class="text-text-main text-lg font-bold tracking-tight hidden sm:block">Kitty Launcher</span>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a class="text-text-main font-medium hover:text-primary transition-colors text-sm" href="#">Home</a>
+                    <a class="text-text-secondary font-medium hover:text-primary transition-colors text-sm"
+                        href="#features">Features</a>
+                    <a class="text-text-secondary font-medium hover:text-primary transition-colors text-sm"
+                        href="#gallery">Gallery</a>
+                    <a class="text-text-secondary font-medium hover:text-primary transition-colors text-sm"
+                        href="#faq">FAQ</a>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button
+                        class="hidden sm:flex bg-primary hover:bg-primary-hover text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all transform hover:scale-105 shadow-md shadow-primary/20 items-center gap-2"
+                        onclick="openModal()">
+                        <span class="material-symbols-outlined text-[18px]">download</span>
+                        Download Game
+                    </button>
+                    <button class="md:hidden p-2 text-text-main hover:text-primary">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <main class="flex-grow flex flex-col items-center justify-center px-4 py-12 md:py-20">
+            <div class="w-full max-w-[1100px] grid md:grid-cols-2 gap-12 items-center">
+                <div class="flex flex-col gap-6 text-center md:text-left z-10">
+                    <div
+                        class="inline-flex items-center gap-2 bg-white border border-primary/20 rounded-full px-4 py-1.5 self-center md:self-start shadow-sm">
+                        <span class="size-2 bg-green-400 rounded-full animate-pulse"></span>
+                        <span class="text-xs font-bold text-primary tracking-wide uppercase">Season 5 is Live!</span>
+                    </div>
+                    <h1
+                        class="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-text-main leading-[1.1]">
+                        The <span class="text-primary">Coziest</span> Place to Build.
+                    </h1>
+                    <p class="text-text-secondary text-lg md:text-xl leading-relaxed max-w-lg mx-auto md:mx-0">
+                        Join a wholesome Hello Kitty themed Minecraft community. Build your dream pastel cottage,
+                        collect cute hats, and make new friends!
+                    </p>
+                    <div class="flex flex-col items-center md:items-start gap-4 mt-6">
+                        <button
+                            class="btn-retro-pink w-full sm:w-auto px-8 py-5 rounded-full font-extrabold text-xl flex items-center justify-center gap-3 relative overflow-hidden group mb-4"
+                            onclick="openModal()">
+                            <span class="material-symbols-outlined text-3xl animate-bounce">download</span>
+                            <div class="flex flex-col items-start">
+                                <span class="leading-none">Download Kitties Land</span>
+                                <span class="text-xs font-normal opacity-90 mt-1">(Windows Installer)</span>
+                            </div>
+                        </button>
+                        <div
+                            class="flex items-center gap-3 w-full sm:w-auto bg-black/5 rounded-full pl-4 pr-1 py-1 border border-black/10 max-w-[320px]">
+                            <span
+                                class="text-sm font-medium text-text-secondary truncate">kittylauncher.wuaze.com</span>
+                            <button
+                                class="bg-black text-white px-3 py-1.5 rounded-full text-xs font-bold hover:bg-gray-800 transition-colors ml-auto flex-shrink-0"
+                                onclick="navigator.clipboard.writeText('kittylauncher.wuaze.com').then(()=>{this.textContent='Copied!';setTimeout(()=>{this.textContent='Copy IP'},2000)})">Copy
+                                IP</button>
+                        </div>
+                    </div>
+                    <div
+                        class="flex items-center justify-center md:justify-start gap-2 mt-4 text-text-secondary text-sm font-medium">
+                        <div class="flex -space-x-2">
+                            <img alt="User Avatar" class="w-8 h-8 rounded-full border-2 border-white"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUj_p1HuIUxt8mekw_qYeGM-Aisk5KOQxRssxoNnVHH4bcWKzOBXRlCHr0Megt__ky1MhSem-LE93wTinOJfT48l_1PIGKRKxNooyKOeW_k2nwXpHD68CVkVgB1avmyuLeI-RWR35CxDR6NATw4-_SdPZdpNMQU_u-pzy-S05bgR63tA3NbPiPJyvFU9iMs2k4T7GGfzQMuo3VMj1Js2_kCYAFW8PVhpgrN8eiX83AlEyJ0TH23qe5NPTvIc33mgLCQsGP9TwxtPY" />
+                            <img alt="User Avatar" class="w-8 h-8 rounded-full border-2 border-white"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYg7DziaAunGdfYcEm-rEyRzMBIJ0eTWazyK99c67CK0Dq7ypNEhTj5FBdpeyYz1d7n2dJ3BO0qwHE2TxquApVVy7JccBpbbvlRpecjaBR0xo0RjtVYeEBVYucbdemes4xMBBe1V9bDcJVooRh9yVerOkeBbKx3mctLodSYD4_Xe3QhSlgCVkOs2xTO96b0aV9dDsaaU4Lua1hSFLHzgUrIdgq-NTdcWvMO7JQBYfwmPFfeQRnywfc2X2_NQKE4c0p8ufQnLtTJME" />
+                            <img alt="User Avatar" class="w-8 h-8 rounded-full border-2 border-white"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAegZkE-gLzfVCDlsqdgcIFjv3S8Ei1R6HwY84CDbWMdPui9ogVQcVgKvZo8Pfd3wkMslrcxdM6CI4o8WpHt4vUDPNN6gVKtC6JxoGSvWOWTvOYhKeTETZKxQ3BsiyTbag4vHuiz6B2puiEWubbxCgyW_4xBHkP-byeubFMA_QgDWMrqLz_qw4rRpd_cq4qBrMWHJuBQnc5WZMxJZsCAl94oj6stgWHSbYFT5brWVeLIsWv7w9lFXbwe7e4YjOHgZ9jgwRX4-HmkU" />
+                        </div>
+                        <p><span class="text-primary font-bold">124</span> kitties playing right now</p>
+                    </div>
+                </div>
+                <div class="relative w-full aspect-square md:aspect-auto md:h-[600px] flex items-center justify-center">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent rounded-full blur-3xl animate-float-delayed">
+                    </div>
+                    <div
+                        class="relative z-10 w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500 border-8 border-white animate-float">
+                        <div class="absolute inset-0 bg-cover bg-center"
+                            data-alt="Pink cherry blossom minecraft landscape with shaders"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAaXZFTVGgE-H9gbfH8bvplOq0bVNwjJGXm9BWzN3AMQkHToYscGverJd2n4RcnMwtVOKJqdVqYbFXDIBssrrPIlYiz7T62ZdumpQ4UWMNnSJdXrgd4HNGQdbnrNW9Q-7WlRCE8M13sR9cQCmG80jTwmq5ZGSUIF561Qr5fD_R0e8FRo_QudRUyGkmePk4KzaQrgkgo8lCV13Bj0J2CsUlx3IvnIeb0Ta-zsHSaLbaisRp6XUH6nEEmzy-MNYETdYyklbJXhOSZRM8');">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-8">
+                            <div class="text-white">
+                                <p class="font-bold text-xl"></p>
+                                <p class="opacity-90 text-sm"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 md:bottom-20 md:-left-10 z-20 bg-white p-4 rounded-xl shadow-xl flex items-center gap-3 animate-bounce"
+                        style="animation-duration: 3s;">
+                        <div class="bg-green-100 p-2 rounded-full text-green-600">
+                            <span class="material-symbols-outlined">wifi</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 font-bold uppercase">Server Status</p>
+                            <p class="text-green-600 font-bold">Online &amp; Stable</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <section class="py-10 px-4">
+            <div class="max-w-[1100px] mx-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <div
+                        class="bg-white rounded-xl p-6 shadow-card flex items-center gap-4 hover:shadow-soft transition-all cursor-default">
+                        <div class="size-12 rounded-full bg-soft-pink flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined">group</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-text-main">15,402</h3>
+                            <p class="text-text-secondary text-sm">Registered Players</p>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white rounded-xl p-6 shadow-card flex items-center gap-4 hover:shadow-soft transition-all cursor-default">
+                        <div class="size-12 rounded-full bg-soft-purple flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined">schedule</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-text-main">99.9%</h3>
+                            <p class="text-text-secondary text-sm">Server Uptime</p>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white rounded-xl p-6 shadow-card flex items-center gap-4 hover:shadow-soft transition-all cursor-default">
+                        <div class="size-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-500">
+                            <span class="material-symbols-outlined">diamond</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-text-main">No Grief</h3>
+                            <p class="text-text-secondary text-sm">Claim Protection</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-20 px-4 relative overflow-hidden" id="features">
+            <div class="max-w-[1100px] mx-auto relative z-10">
+                <div class="text-center mb-16 max-w-2xl mx-auto">
+                    <span
+                        class="text-primary font-bold tracking-wider uppercase text-sm bg-primary/10 px-3 py-1 rounded-full">Server
+                        Features</span>
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-text-main mt-4 mb-6">Everything You Need for a
+                        <span class="text-primary italic">Kawaii</span> Life
+                    </h2>
+                    <p class="text-text-secondary text-lg">We've curated a unique survival experience designed for
+                        comfort, creativity, and cuteness overload.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div
+                        class="bg-white p-8 rounded-2xl border border-gray-100 shadow-card hover:shadow-soft transition-all group hover:-translate-y-2">
+                        <div
+                            class="w-14 h-14 bg-soft-pink rounded-xl flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-3xl">cottage</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-text-main mb-3">Cozy Building</h3>
+                        <p class="text-text-secondary leading-relaxed">
+                            Claim your land easily and build your dream pastel cottage without worry. Griefing is
+                            strictly disabled!
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white p-8 rounded-2xl border border-gray-100 shadow-card hover:shadow-soft transition-all group hover:-translate-y-2">
+                        <div
+                            class="w-14 h-14 bg-soft-purple rounded-xl flex items-center justify-center text-purple-500 mb-6 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-3xl">auto_fix</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-text-main mb-3">Custom Cosmetics</h3>
+                        <p class="text-text-secondary leading-relaxed">
+                            Collect unique Hello Kitty hats, magical wands, and furniture custom-made just for our
+                            server texture pack.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white p-8 rounded-2xl border border-gray-100 shadow-card hover:shadow-soft transition-all group hover:-translate-y-2">
+                        <div
+                            class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-500 mb-6 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-3xl">favorite</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-text-main mb-3">Wholesome Community</h3>
+                        <p class="text-text-secondary leading-relaxed">
+                            A non-toxic, strictly moderated friendly environment where everyone supports each other. No
+                            bullies allowed!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-20 bg-white" id="gallery">
+            <div class="max-w-[1400px] mx-auto px-4">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-10 px-4 md:px-20 gap-4">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-text-main">Community Gallery</h2>
+                        <p class="text-text-secondary mt-2">See what our players are building.</p>
+                    </div>
+                    <a class="text-primary font-bold hover:underline flex items-center gap-1" href="#">
+                        View All Screenshots <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </a>
+                </div>
+                <div class="overflow-x-auto no-scrollbar pb-10 px-4 md:px-20">
+                    <div class="flex gap-6 w-max">
+                        <div class="w-[300px] md:w-[400px] flex-shrink-0 group cursor-pointer">
+                            <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-4 relative">
+                                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10">
+                                </div>
+                                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700"
+                                    data-alt="A large pink castle built in minecraft with shaders"
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCqnpB4uTTq8DfMDA95lx-GjGmHS5P_wStpbzQbNlVDTpvMjMkE_pICZvxc8gOZd6NLgxYavFXQxfrbfPuUWPn9GXH8rNQ5wzwB0pg69ftNauqDJDIniSXcqFWBVsP1mCY-Icny3NusgVj8JRPd0C0LWTVlTRgscFDApgghZ2zYvkPJ8MTb9KKN2DFkZ7BUA4cBKxJ61Rn-yfcceoUCt5KK5aksMzG8ucg-RySnWI1WiEzidkE9f4w8GlrG0PEoOjK9uk2gFXy_lwM');">
+                                </div>
+                            </div>
+                            <h4 class="font-bold text-text-main text-lg">Princess Castle</h4>
+                            <p class="text-sm text-text-secondary">By QueenBee12</p>
+                        </div>
+                        <div class="w-[300px] md:w-[400px] flex-shrink-0 group cursor-pointer">
+                            <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-4 relative">
+                                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10">
+                                </div>
+                                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700"
+                                    data-alt="A cute garden cafe built in minecraft with flowers"
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCEXT_uqtebNOb15b1YC-03hwY-s7FkzGpUzlJ8XiaF9kZsSCZUXtk32nAU_92PpXwZ2luf6wzShT4k4BzY-rhYu5ufjjPBU7LExTZ4GuL3PqENCOgWKVs4YKWC_9cyVXPSRxX5sxm34PjcpLkaSpDchYqsg7eV78Hf_2jFzamDt1FPNsL27O0kP69ae2ClOpWbLJy_tunqVmGdW5a4lVh6jr7bPDK3a_c02ux3WQzQ1txY_vpU-XEPDtaso0kxc9LY491X4ceihcM');">
+                                </div>
+                            </div>
+                            <h4 class="font-bold text-text-main text-lg">Morning Tea Garden</h4>
+                            <p class="text-sm text-text-secondary">By TeaLeaf</p>
+                        </div>
+                        <div class="w-[300px] md:w-[400px] flex-shrink-0 group cursor-pointer">
+                            <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-4 relative">
+                                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10">
+                                </div>
+                                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700"
+                                    data-alt="Modern pink house interior minecraft"
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBN_4AahZ_RCyEqscQ2ES3p6OqDL2zmmqpwQw4iSbY-ddwj6E6sZSBDaywtYO7rsGEjvAcn5dF_DwQnb8wDEJ8YiA42qM1WbiMTHDCRHhWXm-qr2OwgatZD9u8Qg3vaif6UYhdykrDoV1XeJ4alxsuMypKbTfypR15gHadC7_8VeNYv58fqtopH5CQSPA1PJXKPC9ZaGJjJbof8B9rbBo_45Td1IsE-p4cScndu-OXYnCzfmOco74NPhJo0fU6S6Na6vXiJZe_g0Eg');">
+                                </div>
+                            </div>
+                            <h4 class="font-bold text-text-main text-lg">Sanrio Shopping Mall</h4>
+                            <p class="text-sm text-text-secondary">By BuildTeamAlpha</p>
+                        </div>
+                        <div class="w-[300px] md:w-[400px] flex-shrink-0 group cursor-pointer">
+                            <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-4 relative">
+                                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10">
+                                </div>
+                                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700"
+                                    data-alt="Pixel art of a cat face on a green field"
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA8HE2odI33Kwd4eskcNwnpYGbgYXdEkIU9udyovtzUn7hMKUKShj3WXLCBq3r3DZoQqB9RXZnk7YJvPCnqeFa-cW9y-DGgE0v4Tfsu18Wb7a5f0NFxQC24MWVP16QVkHj4wyqpIN0tS2ik5EtbIRbLu1kLKPU68H1GM51H9XIseVaw3ZlIAhQnKU-6DnnCMzZAFCxJE-gq5i95EerkJsxrhl9I2EDg-htUQl625i694OoBkbkhfcEc62h6IN4UDKZM9KCafrr_oXY');">
+                                </div>
+                            </div>
+                            <h4 class="font-bold text-text-main text-lg">Spawn Pixel Art</h4>
+                            <p class="text-sm text-text-secondary">By ServerAdmin</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-20 px-4 bg-background-light relative overflow-hidden" id="faq">
+            <div
+                class="absolute top-0 right-0 w-[300px] h-[300px] bg-soft-pink rounded-full blur-[80px] opacity-40 translate-x-1/2 -translate-y-1/2">
+            </div>
+            <div
+                class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-soft-purple rounded-full blur-[80px] opacity-40 -translate-x-1/2 translate-y-1/2">
+            </div>
+            <div class="max-w-[900px] mx-auto relative z-10">
+                <div class="text-center mb-16">
+                    <span
+                        class="text-primary font-bold tracking-wider uppercase text-sm bg-primary/10 px-3 py-1 rounded-full">Help
+                        Center</span>
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-text-main mt-4 mb-4">Frequently Asked Questions
+                    </h2>
+                    <p class="text-text-secondary text-lg">Everything you need to know about joining our fluffy
+                        paradise.</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <details
+                        class="group bg-white rounded-2xl border border-primary/10 shadow-card hover:shadow-soft transition-all duration-300">
+                        <summary
+                            class="flex items-center justify-between p-6 cursor-pointer list-none [&amp;::-webkit-details-marker]:hidden">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="size-12 rounded-xl bg-soft-pink flex items-center justify-center text-primary flex-shrink-0 group-hover:scale-110 transition-transform">
+                                    <span class="material-symbols-outlined">login</span>
+                                </div>
+                                <h3
+                                    class="font-bold text-lg md:text-xl text-text-main group-hover:text-primary transition-colors">
+                                    How do I join the server?</h3>
+                            </div>
+                            <div
+                                class="size-8 rounded-full border border-gray-200 flex items-center justify-center text-text-secondary group-open:bg-primary group-open:text-white group-open:border-primary group-open:rotate-180 transition-all">
+                                <span class="material-symbols-outlined">expand_more</span>
+                            </div>
+                        </summary>
+                        <div class="px-6 pb-6 pt-0 ml-[4rem] text-text-secondary leading-relaxed">
+                            <p>It's super easy! If you are on Java Edition, simply use the IP <strong
+                                    class="text-primary">kittylauncher.wuaze.com</strong>. For Bedrock players (Mobile,
+                                Console), use the same IP with port <strong>19132</strong>.</p>
+                        </div>
+                    </details>
+                    <details
+                        class="group bg-white rounded-2xl border border-primary/10 shadow-card hover:shadow-soft transition-all duration-300">
+                        <summary
+                            class="flex items-center justify-between p-6 cursor-pointer list-none [&amp;::-webkit-details-marker]:hidden">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="size-12 rounded-xl bg-soft-purple flex items-center justify-center text-purple-500 flex-shrink-0 group-hover:scale-110 transition-transform">
+                                    <span class="material-symbols-outlined">devices</span>
+                                </div>
+                                <h3
+                                    class="font-bold text-lg md:text-xl text-text-main group-hover:text-primary transition-colors">
+                                    Is it compatible with Bedrock?</h3>
+                            </div>
+                            <div
+                                class="size-8 rounded-full border border-gray-200 flex items-center justify-center text-text-secondary group-open:bg-primary group-open:text-white group-open:border-primary group-open:rotate-180 transition-all">
+                                <span class="material-symbols-outlined">expand_more</span>
+                            </div>
+                        </summary>
+                        <div class="px-6 pb-6 pt-0 ml-[4rem] text-text-secondary leading-relaxed">
+                            <p>Yes! We support full cross-play via GeyserMC. Whether you are on Java, Windows 10, Xbox,
+                                PlayStation, Switch, or Mobile, you can play together in the same world.</p>
+                        </div>
+                    </details>
+                    <details
+                        class="group bg-white rounded-2xl border border-primary/10 shadow-card hover:shadow-soft transition-all duration-300">
+                        <summary
+                            class="flex items-center justify-between p-6 cursor-pointer list-none [&amp;::-webkit-details-marker]:hidden">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="size-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-500 flex-shrink-0 group-hover:scale-110 transition-transform">
+                                    <span class="material-symbols-outlined">gavel</span>
+                                </div>
+                                <h3
+                                    class="font-bold text-lg md:text-xl text-text-main group-hover:text-primary transition-colors">
+                                    What are the server rules?</h3>
+                            </div>
+                            <div
+                                class="size-8 rounded-full border border-gray-200 flex items-center justify-center text-text-secondary group-open:bg-primary group-open:text-white group-open:border-primary group-open:rotate-180 transition-all">
+                                <span class="material-symbols-outlined">expand_more</span>
+                            </div>
+                        </summary>
+                        <div class="px-6 pb-6 pt-0 ml-[4rem] text-text-secondary leading-relaxed">
+                            <p>We are a wholesome community. Our main rules are: Be kind, no griefing, no stealing, and
+                                keep the chat family-friendly. You can read the full rulebook in-game with /rules.</p>
+                        </div>
+                    </details>
+                    <details
+                        class="group bg-white rounded-2xl border border-primary/10 shadow-card hover:shadow-soft transition-all duration-300">
+                        <summary
+                            class="flex items-center justify-between p-6 cursor-pointer list-none [&amp;::-webkit-details-marker]:hidden">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="size-12 rounded-xl bg-green-50 flex items-center justify-center text-green-500 flex-shrink-0 group-hover:scale-110 transition-transform">
+                                    <span class="material-symbols-outlined">palette</span>
+                                </div>
+                                <h3
+                                    class="font-bold text-lg md:text-xl text-text-main group-hover:text-primary transition-colors">
+                                    Do I need a texture pack?</h3>
+                            </div>
+                            <div
+                                class="size-8 rounded-full border border-gray-200 flex items-center justify-center text-text-secondary group-open:bg-primary group-open:text-white group-open:border-primary group-open:rotate-180 transition-all">
+                                <span class="material-symbols-outlined">expand_more</span>
+                            </div>
+                        </summary>
+                        <div class="px-6 pb-6 pt-0 ml-[4rem] text-text-secondary leading-relaxed">
+                            <p>It's not required but highly recommended! Our custom server resource pack adds cute
+                                furniture, hats, and a pink UI. It will prompt you to download automatically when you
+                                join.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 px-4 relative overflow-hidden bg-primary">
+            <div class="absolute inset-0 opacity-10"
+                style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 20px 20px;"></div>
+            <div class="relative z-10 max-w-4xl mx-auto text-center text-white">
+                <div
+                    class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-8 animate-bounce">
+                    <span class="material-symbols-outlined text-4xl">favorite</span>
+                </div>
+                <h2 class="text-4xl md:text-6xl font-extrabold mb-6">Ready to join the cuteness?</h2>
+                <p class="text-xl md:text-2xl text-white/90 mb-10 font-medium">Join over 15,000 players on the most
+                    wholesome server in Minecraft history.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button
+                        class="bg-white text-primary hover:bg-gray-100 px-8 py-4 rounded-full font-bold text-lg transition-all shadow-xl"
+                        onclick="navigator.clipboard.writeText('kittylauncher.wuaze.com').then(()=>{this.textContent='IP Copied!';setTimeout(()=>{this.textContent='Copy IP: kittylauncher.wuaze.com'},2000)})">
+                        Copy IP: kittylauncher.wuaze.com
+                    </button>
+                    <button
+                        class="bg-black/20 hover:bg-black/30 backdrop-blur-sm text-white border border-white/30 px-8 py-4 rounded-full font-bold text-lg transition-all flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined">chat</span>
+                        Join Discord
+                    </button>
+                </div>
+            </div>
+        </section>
+        <footer class="bg-background-light pt-16 pb-8 border-t border-gray-100">
+            <div class="max-w-[1100px] mx-auto px-4">
+                <div class="flex flex-col md:flex-row justify-between items-start gap-10">
+                    <div class="max-w-xs">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="material-symbols-outlined text-primary">pets</span>
+                            <span class="text-text-main font-bold text-xl">Kitty Launcher</span>
+                        </div>
+                        <p class="text-text-secondary text-sm leading-relaxed">
+                            Not affiliated with Mojang or Sanrio. We are just a fan community dedicated to cute building
+                            and wholesome vibes.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-10 md:gap-20">
+                        <div class="flex flex-col gap-3">
+                            <h4 class="font-bold text-text-main">Server</h4>
+                            <a class="text-text-secondary hover:text-primary text-sm" href="#">Vote for Us</a>
+                            <a class="text-text-secondary hover:text-primary text-sm" href="#">Store</a>
+                            <a class="text-text-secondary hover:text-primary text-sm" href="BanList.html">Ban List</a>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <h4 class="font-bold text-text-main">Support</h4>
+                            <a class="text-text-secondary hover:text-primary text-sm" href="Contact.html">Help
+                                Center</a>
+                            <a class="text-text-secondary hover:text-primary text-sm" href="Contact.html">Contact
+                                Staff</a>
+                            <a class="text-text-secondary hover:text-primary text-sm" href="rules.html">Rules</a>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <h4 class="font-bold text-text-main">Socials</h4>
+                            <a class="text-text-secondary hover:text-primary text-sm flex items-center gap-1"
+                                href="#">Twitter <span
+                                    class="material-symbols-outlined text-[14px]">open_in_new</span></a>
+                            <a class="text-text-secondary hover:text-primary text-sm flex items-center gap-1"
+                                href="#">TikTok <span
+                                    class="material-symbols-outlined text-[14px]">open_in_new</span></a>
+                            <a class="text-text-secondary hover:text-primary text-sm flex items-center gap-1"
+                                href="#">Instagram <span
+                                    class="material-symbols-outlined text-[14px]">open_in_new</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="border-t border-gray-200 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-text-secondary">
+                    <p>© 2026 Kitty Launcher. All rights reserved.</p>
+                    <div class="flex items-center gap-1">
+                        <span>Made with</span>
+                        <span class="material-symbols-outlined text-primary text-[16px]">favorite</span>
+                        <span>by the Kitty Launcher Team</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script>
+        function openModal() {
+            const modal = document.getElementById('downloadModal');
+            const content = document.getElementById('modalContent');
+            modal.classList.remove('hidden');
+            // Small delay to allow display:block to apply before starting transition
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+        function closeModal() {
+            const modal = document.getElementById('downloadModal');
+            const content = document.getElementById('modalContent');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            // Wait for transition to finish
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+    </script>
+</body>
+
+</html>

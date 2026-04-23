@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kitty Launcher - Server Rules</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#eb4770",
+              "primary-soft": "#fcecee",
+              "background-light": "#f8f6f6",
+              "background-dark": "#211115",
+              "surface-light": "#ffffff",
+              "surface-dark": "#2a181c",
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "1.5rem", "xl": "2rem", "2xl": "2.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for a cuter look */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f3acc0; 
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #eb4770; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display text-[#181113] dark:text-white transition-colors duration-200">
+<!-- TopNavBar -->
+<div class="w-full bg-surface-light dark:bg-surface-dark border-b border-[#f4f0f1] dark:border-[#3a2228] sticky top-0 z-50">
+<div class="px-4 md:px-10 py-3 max-w-[1440px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="size-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">pets</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-primary">Kitty Launcher</h2>
+</div>
+<div class="hidden lg:flex items-center gap-8">
+<nav class="flex items-center gap-6">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+<a class="text-sm font-bold text-primary" href="rules.html">Rules</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="Contact.html">Contact</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Discord</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Store</a>
+</nav>
+<button class="flex h-10 px-6 cursor-pointer items-center justify-center rounded-full bg-primary hover:bg-primary/90 transition-colors text-white text-sm font-bold tracking-wide shadow-lg shadow-primary/30">
+<span>Play</span>
+</button>
+</div>
+<!-- Mobile Menu Button -->
+<button class="lg:hidden text-primary p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+<!-- Main Layout Container -->
+<main class="flex-grow flex justify-center py-6 px-4 md:px-8">
+<div class="max-w-[1200px] w-full flex flex-col gap-8">
+<!-- Hero Section -->
+<div class="rounded-2xl overflow-hidden relative bg-primary/5 dark:bg-surface-dark border border-primary/10 shadow-sm">
+<div class="flex flex-col md:flex-row gap-8 p-8 md:p-12 items-center">
+<div class="flex-1 flex flex-col gap-6 text-center md:text-left z-10">
+<div class="inline-flex self-center md:self-start items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-white/10 border border-primary/20 text-xs font-bold text-primary uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>Official Guidelines</span>
+</div>
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight text-gray-900 dark:text-white">Server <span class="text-primary">Rules</span></h1>
+<p class="text-lg text-gray-600 dark:text-gray-300 max-w-xl">A guide we created to ensure everyone has a happy, safe, and enjoyable time in the Kitty Launcher. Please read carefully! 🎀</p>
+<div class="flex flex-wrap gap-4 justify-center md:justify-start">
+<button class="h-12 px-6 rounded-full bg-primary text-white font-bold text-sm shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">menu_book</span>
+                                Read Rules
+                            </button>
+<button class="h-12 px-6 rounded-full bg-white dark:bg-white/10 border border-primary/20 text-primary dark:text-white font-bold text-sm hover:bg-primary/5 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">group_add</span>
+                                Join Discord
+                            </button>
+</div>
+</div>
+<div class="w-full md:w-1/2 aspect-video md:aspect-square lg:aspect-[4/3] rounded-2xl bg-cover bg-center shadow-inner border-4 border-white dark:border-white/10 rotate-2 hover:rotate-0 transition-transform duration-500" data-alt="Pink themed minecraft landscape with cherry blossom trees" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAXOmXE6wNM8oZ4NvzSmhFfE7BjCuqwKMpOkyS48LW9JLU2tVovap-nUsdCRWv7Gnu9kV-EHtWGKL4gw8PGbAcu3iJPs_DHT45VtZQVxQNUsfUXJjLr5NKHHCGUqQpV064WvWaY0mPbWpFXukHMhBDdbkayj8n9_fHmbkKeFJuCg2d7Nlf64ASvYQvJsved9ZI1N6WUr1nyKK8M6uXXaCc-Os3xhdp_oB7DwMf7i8uSOqo4S-gKmZkd3L9oxyY_abUqgYbGnQyKnU0");'>
+</div>
+</div>
+<!-- Decoration -->
+<div class="absolute -top-10 -right-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl -z-0"></div>
+<div class="absolute -bottom-10 -left-10 w-64 h-64 bg-blue-300/10 rounded-full blur-3xl -z-0"></div>
+</div>
+<!-- Two Column Layout: Sidebar & Content -->
+<div class="flex flex-col lg:flex-row gap-8 relative items-start">
+<!-- Sticky Sidebar (Table of Contents) -->
+<aside class="hidden lg:flex w-64 flex-col gap-4 sticky top-24 shrink-0">
+<div class="bg-surface-light dark:bg-surface-dark border border-gray-100 dark:border-gray-800 rounded-xl p-5 shadow-sm">
+<h3 class="font-bold text-lg mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">toc</span> Table of Contents</h3>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 p-2 rounded-lg bg-primary/5 text-primary font-bold text-sm" href="#degerler"><span class="material-symbols-outlined text-[18px]">favorite</span> Our Values</a>
+<a class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-gray-400 font-medium text-sm transition-colors" href="#davranis"><span class="material-symbols-outlined text-[18px]">sentiment_satisfied</span> Conduct</a>
+<a class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-gray-400 font-medium text-sm transition-colors" href="#oyunici"><span class="material-symbols-outlined text-[18px]">sports_esports</span> In-Game</a>
+<a class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-gray-400 font-medium text-sm transition-colors" href="#iletisim"><span class="material-symbols-outlined text-[18px]">chat</span> Chat</a>
+</nav>
+</div>
+<div class="bg-gradient-to-br from-primary to-pink-600 rounded-xl p-6 text-white text-center shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-4xl mb-2">support_agent</span>
+<h4 class="font-bold mb-2">Having issues?</h4>
+<p class="text-sm opacity-90 mb-4">If you see a rule violation, please let us know.</p>
+<button class="w-full py-2 bg-white text-primary rounded-lg text-sm font-bold hover:bg-opacity-90 transition">Support Ticket</button>
+</div>
+</aside>
+<!-- Content Column -->
+<div class="flex-1 flex flex-col gap-10 w-full">
+<!-- Feature Section (Values) -->
+<section class="scroll-mt-28" id="degerler">
+<div class="flex flex-col gap-4 mb-6">
+<h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-3"><span class="p-2 bg-yellow-100 text-yellow-600 rounded-lg material-symbols-outlined">star</span> Our Core Values</h2>
+<p class="text-gray-600 dark:text-gray-400">The three main principles our community is built upon.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Value 1 -->
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-gray-100 dark:border-gray-800 hover:shadow-md transition-shadow">
+<div class="w-12 h-12 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined">favorite</span>
+</div>
+<h3 class="font-bold text-lg mb-2">Love &amp; Respect</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Be kind and inclusive to every player. There is no place for hate speech.</p>
+</div>
+<!-- Value 2 -->
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-gray-100 dark:border-gray-800 hover:shadow-md transition-shadow">
+<div class="w-12 h-12 bg-purple-100 text-purple-500 rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined">brush</span>
+</div>
+<h3 class="font-bold text-lg mb-2">Creativity</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Build amazing structures, beautify the world, and let your art speak.</p>
+</div>
+<!-- Value 3 -->
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-gray-100 dark:border-gray-800 hover:shadow-md transition-shadow">
+<div class="w-12 h-12 bg-blue-100 text-blue-500 rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined">handshake</span>
+</div>
+<h3 class="font-bold text-lg mb-2">Helping Others</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Guide new players and share your resources.</p>
+</div>
+</div>
+</section>
+<!-- Zero Tolerance Alert -->
+<div class="bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/50 p-5 rounded-xl flex gap-4 items-start">
+<div class="bg-red-100 dark:bg-red-900/40 p-2 rounded-full text-red-500 shrink-0">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div>
+<h4 class="font-bold text-red-600 dark:text-red-400 mb-1">Zero Tolerance Policy</h4>
+<p class="text-sm text-red-800/80 dark:text-red-300/80 leading-relaxed">Using cheats (X-Ray, Kill Aura, etc.), damaging the server (Griefing), and behaviors involving severe insults are grounds for a <strong>permanent ban</strong>. No appeals are accepted for these matters.</p>
+</div>
+</div>
+<!-- Behavior Rules -->
+<section class="scroll-mt-28" id="davranis">
+<h2 class="text-xl md:text-2xl font-bold mb-6 flex items-center gap-3 pb-4 border-b border-gray-100 dark:border-gray-800"><span class="material-symbols-outlined text-primary">sentiment_satisfied</span> General Conduct Rules</h2>
+<div class="flex flex-col gap-3">
+<details class="group bg-surface-light dark:bg-surface-dark border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden transition-all duration-300 open:shadow-md open:border-primary/20">
+<summary class="flex cursor-pointer items-center justify-between p-4 md:p-5 select-none">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-primary/40 group-open:bg-primary transition-colors"></span>
+<span class="font-bold text-gray-900 dark:text-gray-100 group-open:text-primary transition-colors">Framework of Respect</span>
+</div>
+<span class="material-symbols-outlined text-gray-400 group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-5 pb-5 pt-0 text-gray-600 dark:text-gray-400 text-sm leading-relaxed pl-10">
+<p>All players, administrators, and community members must be treated with respect. Discrimination based on religion, language, race, or gender, or making personal attacks, is strictly prohibited.</p>
+</div>
+</details>
+<details class="group bg-surface-light dark:bg-surface-dark border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden transition-all duration-300 open:shadow-md open:border-primary/20">
+<summary class="flex cursor-pointer items-center justify-between p-4 md:p-5 select-none">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-primary/40 group-open:bg-primary transition-colors"></span>
+<span class="font-bold text-gray-900 dark:text-gray-100 group-open:text-primary transition-colors">Disturbing Behaviors</span>
+</div>
+<span class="material-symbols-outlined text-gray-400 group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-5 pb-5 pt-0 text-gray-600 dark:text-gray-400 text-sm leading-relaxed pl-10">
+<p>Trolling, stalking, or actions intentionally meant to ruin a player's enjoyment of the game are forbidden. "I was just joking" is not a valid defense.</p>
+</div>
+</details>
+</div>
+</section>
+<!-- Gameplay Rules -->
+<section class="scroll-mt-28" id="oyunici">
+<h2 class="text-xl md:text-2xl font-bold mb-6 flex items-center gap-3 pb-4 border-b border-gray-100 dark:border-gray-800"><span class="material-symbols-outlined text-blue-500">sports_esports</span> In-Game Rules</h2>
+<div class="flex flex-col gap-3">
+<details class="group bg-surface-light dark:bg-surface-dark border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden transition-all duration-300 open:shadow-md open:border-blue-400/30">
+<summary class="flex cursor-pointer items-center justify-between p-4 md:p-5 select-none">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-blue-400/40 group-open:bg-blue-500 transition-colors"></span>
+<span class="font-bold text-gray-900 dark:text-gray-100 group-open:text-blue-500 transition-colors">Griefing and Structural Damage</span>
+</div>
+<span class="material-symbols-outlined text-gray-400 group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-5 pb-5 pt-0 text-gray-600 dark:text-gray-400 text-sm leading-relaxed pl-10">
+<p>Damaging other players' structures, breaking blocks, or making unauthorized changes is prohibited. Even if no claim has been set, respect others' work. Pouring lava or detonating TNT is strictly forbidden.</p>
+</div>
+</details>
+<details class="group bg-surface-light dark:bg-surface-dark border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden transition-all duration-300 open:shadow-md open:border-blue-400/30">
+<summary class="flex cursor-pointer items-center justify-between p-4 md:p-5 select-none">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-blue-400/40 group-open:bg-blue-500 transition-colors"></span>
+<span class="font-bold text-gray-900 dark:text-gray-100 group-open:text-blue-500 transition-colors">Cheating and 3rd Party Software</span>
+</div>
+<span class="material-symbols-outlined text-gray-400 group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-5 pb-5 pt-0 text-gray-600 dark:text-gray-400 text-sm leading-relaxed pl-10">
+<p>Any modification or cheat software that disrupts the balance of the game, such as X-Ray, Kill Aura, or Fly Hack, is prohibited. Only permitted client-side mods like "Optifine" or "Litematica" (with easy place disabled) may be used.</p>
+</div>
+</details>
+<details class="group bg-surface-light dark:bg-surface-dark border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden transition-all duration-300 open:shadow-md open:border-blue-400/30">
+<summary class="flex cursor-pointer items-center justify-between p-4 md:p-5 select-none">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-blue-400/40 group-open:bg-blue-500 transition-colors"></span>
+<span class="font-bold text-gray-900 dark:text-gray-100 group-open:text-blue-500 transition-colors">PvP and Traps</span>
+</div>
+<span class="material-symbols-outlined text-gray-400 group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-5 pb-5 pt-0 text-gray-600 dark:text-gray-400 text-sm leading-relaxed pl-10">
+<p>PvP (Player vs Player) is only allowed with mutual consent or in designated PvP arenas. Trapping players to kill them (TP trapping, etc.) is forbidden.</p>
+</div>
+</details>
+</div>
+</section>
+<!-- Chat Rules -->
+<section class="scroll-mt-28" id="iletisim">
+<h2 class="text-xl md:text-2xl font-bold mb-6 flex items-center gap-3 pb-4 border-b border-gray-100 dark:border-gray-800"><span class="material-symbols-outlined text-purple-500">chat</span> Chat &amp; Communication</h2>
+<div class="flex flex-col gap-3">
+<details class="group bg-surface-light dark:bg-surface-dark border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden transition-all duration-300 open:shadow-md open:border-purple-400/30">
+<summary class="flex cursor-pointer items-center justify-between p-4 md:p-5 select-none">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-purple-400/40 group-open:bg-purple-500 transition-colors"></span>
+<span class="font-bold text-gray-900 dark:text-gray-100 group-open:text-purple-500 transition-colors">Spam and Flooding</span>
+</div>
+<span class="material-symbols-outlined text-gray-400 group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-5 pb-5 pt-0 text-gray-600 dark:text-gray-400 text-sm leading-relaxed pl-10">
+<p>Filling the chat window unnecessarily, sending the same message repeatedly (spam), or constantly writing in all caps (caps lock) is prohibited.</p>
+</div>
+</details>
+<details class="group bg-surface-light dark:bg-surface-dark border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden transition-all duration-300 open:shadow-md open:border-purple-400/30">
+<summary class="flex cursor-pointer items-center justify-between p-4 md:p-5 select-none">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-purple-400/40 group-open:bg-purple-500 transition-colors"></span>
+<span class="font-bold text-gray-900 dark:text-gray-100 group-open:text-purple-500 transition-colors">Advertising</span>
+</div>
+<span class="material-symbols-outlined text-gray-400 group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-5 pb-5 pt-0 text-gray-600 dark:text-gray-400 text-sm leading-relaxed pl-10">
+<p>Advertising other servers, YouTube channels, or commercial products is prohibited. Chat is for in-game communication only.</p>
+</div>
+</details>
+</div>
+</section>
+<!-- Agreement Box -->
+<div class="mt-8 bg-surface-light dark:bg-surface-dark border-2 border-dashed border-primary/30 rounded-2xl p-8 flex flex-col items-center text-center gap-6">
+<div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">check_circle</span>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-2">Are you ready?</h3>
+<p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto">By logging into the server, you are considered to have read and accepted all the rules above. Have fun!</p>
+</div>
+<p id="serverIP" class="hidden">kittylauncher.wuaze.com</p>
+
+<button id="copyBtn"
+class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-primary/30 transition-all transform hover:scale-105 flex items-center gap-2">
+  <span>Copy Server IP</span>
+  <span class="material-symbols-outlined text-sm">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="mt-20 border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-surface-dark py-12">
+<div class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm">pets</span>
+</div>
+<span class="font-bold text-lg text-primary">Kitty Launcher</span>
+</div>
+<div class="text-sm text-gray-500 dark:text-gray-400 text-center md:text-right">
+<p>© 2026 Kitty Launcher. All rights reserved.</p>
+<p class="text-xs mt-1">Minecraft is a trademark of Mojang AB.</p>
+</div>
+</div>
+</footer>
+</body></html>
